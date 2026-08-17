@@ -18,16 +18,18 @@ security {
         ca-profile {{ acme_ca_profile_name }} {
             ca-identity {{ acme_ca_identity }};
             enrollment {
-                url "{{ acme_url }}";
+                url {{ acme_url }};
             }
         }
     }
     zones {
         security-zone {{ acme_security_zone }} {
-            interfaces {{ acme_security_zone_interface }} {
-                host-inbound-traffic {
-                    system-services {
-                        http;
+            interfaces {
+                {{ acme_security_zone_interface }} {
+                    host-inbound-traffic {
+                        system-services {
+                            http;
+                        }
                     }
                 }
             }
