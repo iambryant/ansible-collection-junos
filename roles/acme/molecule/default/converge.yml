@@ -5,3 +5,5 @@
     - name: "Include iambryant.junos.acme"
       ansible.builtin.include_role:
         name: iambryant.junos.acme
+      vars:
+        acme_email: email@example.com
