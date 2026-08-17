@@ -4,7 +4,7 @@
   tasks:
     - name: Wait for NETCONF port 830 to be ready
       ansible.builtin.wait_for:
-        host: "{{ inventory_hostname }}"
+        host: "{{ ansible_host }}"
         port: 830
         state: started
         delay: 5
