@@ -28,7 +28,7 @@
         acme-key-id {{ acme_key_id }}
         certificate-id {{ cert_id }}
         ca-profile {{ acme_ca_profile_name }}
-        domain-name {{ domain_name }}
+        domain-names {{ domain_name }}
         email {{ acme_email }}
         letsencrypt-enrollment yes terms-of-service agree
     formats: "json"
