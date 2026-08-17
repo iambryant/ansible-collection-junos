@@ -6,10 +6,9 @@ acme_url: "https://acme-v02.api.letsencrypt.org/directory"
 acme_key_type: "ecdsa"
 acme_key_size: "256"
 
-acme_key_id: "ACME-KEY"
-acme_certificate_id: "ACME-CERT"
+acme_key_id: "ACME-ACCOUNT-KEY"
 
-acme_domain_name: ""
+acme_domain_names: []
 acme_email: ""
 
 acme_security_zone: "untrust"

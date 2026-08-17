@@ -1,0 +1,35 @@
+---
+- name: "Ensure certificate ID for domain is set as fact"
+  ansible.builtin.set_fact:
+    cert_id: "ACME-CERT-{{ domain_name | replace('.', '-') | upper }}"
+
+- name: "Check if ACME certificate already exists"
+  juniper.device.command:
+    commands:
+      - "show security pki local-certificate"
+    formats: "json"
+  register: acme_cert_check
+
+- name: "Ensure certificate key pair for domain is generated"
+  juniper.device.command:
+    commands:
+      - >
+        request security pki generate-key-pair size {{ acme_key_size }}
+        type {{ acme_key_type }}
+        certificate-id {{ cert_id }}
+    formats: "json"
+  when: "cert_id not in acme_cert_check.stdout"
+
+- name: "Request ACME certificate for {{ domain_name }}"
+  juniper.device.command:
+    commands:
+      - >
+        request security pki local-certificate enroll acme
+        acme-key-id {{ acme_key_id }}
+        certificate-id {{ cert_id }}
+        ca-profile {{ acme_ca_profile_name }}
+        domain-name {{ domain_name }}
+        email {{ acme_email }}
+        letsencrypt-enrollment yes terms-of-service agree
+    formats: "json"
+  when: "cert_id not in acme_cert_check.stdout"

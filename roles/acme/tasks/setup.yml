@@ -1,0 +1,49 @@
+---
+- name: "Ensure Root CAs are downloaded from Let's Encrypt"
+  ansible.builtin.get_url:
+    url: "{{ acme_download.url }}"
+    dest: "/tmp/{{ acme_download.filename }}"
+    mode: '0644'
+  loop:
+    - url: 'https://letsencrypt.org/certs/isrgrootx1.pem'
+      filename: 'isrgrootx1.pem'
+    - url: 'https://letsencrypt.org/certs/isrg-root-x2.pem'
+      filename: 'isrg-root-x2.pem'
+  loop_control:
+    loop_var: acme_download
+
+- name: "Ensure Root CAs are uploaded to SRX"
+  juniper.device.file_copy:
+    protocol: scp
+    remote_dir: "/var/tmp/"
+    local_dir: "/tmp/"
+    action: put
+    file: "{{ acme_upload.filename }}"
+  loop:
+    - filename: 'isrgrootx1.pem'
+    - filename: 'isrg-root-x2.pem'
+  loop_control:
+    loop_var: acme_upload
+
+- name: "Ensure ACME and security zone configuration are applied"
+  juniper.device.config:
+    load: "replace"
+    format: "text"
+    template: "{{ role_path }}/templates/acme_config.j2"
+    comment: "Configured ACME & security zone via Ansible"
+    vars:
+      acme_ca_profile_name: "{{ acme_ca_profile_name }}"
+      acme_ca_identity: "{{ acme_ca_identity }}"
+      acme_url: "{{ acme_url }}"
+      acme_security_zone: "{{ acme_security_zone }}"
+      acme_security_zone_interface: "{{ acme_security_zone_interface }}"
+
+- name: "Ensure Let's Encrypt Root CAs are loaded into Junos"
+  juniper.device.command:
+    commands:
+      - "request security pki ca-certificate load ca-profile ISRG_Root_X1 filename /var/tmp/isrgrootx1.pem"
+      - "request security pki ca-certificate load ca-profile ISRG_Root_X2 filename /var/tmp/isrg-root-x2.pem"
+    formats: "json"
+    # Set to json to bypass these issues:
+    # https://github.com/Juniper/ansible-junos-stdlib/issues/622
+    # https://github.com/Juniper/ansible-junos-stdlib/issues/808

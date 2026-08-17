@@ -3,6 +3,7 @@ security {
         replace:
         ca-profile ISRG_Root_X1 {
             ca-identity ISRG_Root_X1;
+            pre-load;
             revocation-check {
                 disable;
             }
