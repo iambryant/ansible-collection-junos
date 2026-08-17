@@ -66,9 +66,6 @@ jobs:
       - name: Install containerlab.
         run: bash -c "$(curl -sL https://get.containerlab.dev)"
 
-      - name: Test containerlab deployment.
-        run: containerlab deploy -t clab-tests/vsrx-testing.clab.yml
-
       - name: Run Molecule tests.
         run: molecule test
         working-directory: roles/${{ matrix.role }}

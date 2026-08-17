@@ -7,9 +7,6 @@ dependency:
 driver:
   name: default
 
-platforms:
-  - name: instance
-
 provisioner:
   name: ansible
   inventory:
