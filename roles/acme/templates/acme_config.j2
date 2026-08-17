@@ -1,18 +1,21 @@
 security {
     pki {
-        replace: ca-profile ISRG_Root_X1 {
+        replace:
+        ca-profile ISRG_Root_X1 {
             ca-identity ISRG_Root_X1;
             revocation-check {
                 disable;
             }
         }
-        replace: ca-profile ISRG_Root_X2 {
+        replace:
+        ca-profile ISRG_Root_X2 {
             ca-identity ISRG_Root_X2;
             revocation-check {
                 disable;
             }
         }
-        replace: ca-profile {{ acme_ca_profile_name }} {
+        replace:
+        ca-profile {{ acme_ca_profile_name }} {
             ca-identity {{ acme_ca_identity }};
             enrollment {
                 url "{{ acme_url }}";
