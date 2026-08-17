@@ -31,6 +31,7 @@
     format: "text"
     template: "acme_config.j2"
     comment: "Configured ACME & security zone via Ansible"
+    vars: {}
 
 - name: "Ensure Let's Encrypt Root CAs are loaded into Junos"
   juniper.device.command:
