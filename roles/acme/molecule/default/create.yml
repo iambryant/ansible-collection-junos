@@ -5,4 +5,6 @@
   gather_facts: false
   tasks:
     - name: "Ensure containerlab topology is deployed"
-      ansible.builtin.command: "containerlab deploy -t clab-tests/vsrx-testing.clab.yml"
+      ansible.builtin.command: >
+        containerlab deploy
+        -t {{ lookup('env', 'GITHUB_WORKSPACE') }}/clab-tests/vsrx-testing.clab.yml
