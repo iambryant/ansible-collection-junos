@@ -1,0 +1,8 @@
+---
+- name: Destroy
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: "Ensure containerlab topology is destroyed"
+      ansible.builtin.command: "containerlab destroy -t clab-tests/vsrx-testing.clab.yml"

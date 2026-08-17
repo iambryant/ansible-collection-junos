@@ -1,0 +1,35 @@
+---
+namespace: iambryant
+
+name: junos
+
+version: 1.0.0
+
+readme: README.md
+
+authors:
+  - iambryant
+
+description: This collection includes roles for automating common tasks in Junos OS.
+
+license:
+  - MIT
+
+license_file: 'LICENSE'
+
+tags:
+  - junos
+  - infrastructure
+
+dependencies:
+  juniper.device: ">=2.0.2"
+
+repository: https://github.com/iambryant/ansible-collection-junos
+
+documentation: https://github.com/iambryant/ansible-collection-junos
+
+homepage: http://example.com
+
+issues: https://github.com/iambryant/ansible-collection-junos/issues
+
+build_ignore: []

@@ -1,0 +1,14 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+
+driver:
+  name: default
+
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ${MOLECULE_PREPARE_PLAYBOOK:-prepare.yml}
+    converge: ${MOLECULE_PLAYBOOK:-converge.yml}

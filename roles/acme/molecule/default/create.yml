@@ -1,0 +1,8 @@
+---
+- name: Create
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: "Ensure containerlab topology is deployed"
+      ansible.builtin.command: "containerlab deploy -t clab-tests/vsrx-testing.clab.yml"
