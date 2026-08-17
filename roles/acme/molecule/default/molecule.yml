@@ -12,6 +12,9 @@ platforms:
 
 provisioner:
   name: ansible
+  inventory:
+    links:
+      hosts: inventory.yml
   playbooks:
     prepare: ${MOLECULE_PREPARE_PLAYBOOK:-prepare.yml}
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
