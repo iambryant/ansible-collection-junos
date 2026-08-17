@@ -2,7 +2,10 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: "Wait for instances to boot and respond to SSH"
-      ansible.builtin.wait_for_connection:
+    - name: Wait for NETCONF port 830 to be ready
+      ansible.builtin.wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 830
+        state: started
         delay: 5
         timeout: 300
