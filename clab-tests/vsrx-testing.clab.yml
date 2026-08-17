@@ -4,3 +4,4 @@ topology:
     vsrx-01:
       kind: juniper_vsrx
       image: ghcr.io/iambryant/vrnetlab/juniper_vsrx:23.4R2-S5.5
+      startup-config: __clabNodeName__.partial.cfg

@@ -11,3 +11,4 @@
       ansible.builtin.command: >
         containerlab destroy
         -t {{ lookup('env', 'GITHUB_WORKSPACE') }}/clab-tests/vsrx-testing.clab.yml
+        --cleanup
