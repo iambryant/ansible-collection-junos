@@ -6,4 +6,4 @@
       ansible.builtin.include_role:
         name: iambryant.junos.acme
       vars:
-        acme_email: email@example.com
+        acme_email: "email@example.com"
