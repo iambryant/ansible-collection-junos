@@ -4,6 +4,9 @@
   connection: local
   gather_facts: false
   tasks:
+    # We set the working directory to "roles/${{ matrix.role }}" for molecule,
+    # but we need to look back in the home directory so containerlab knows
+    # we're logged in to ghcr.io
     - name: "Ensure containerlab topology is destroyed"
       ansible.builtin.command: >
         containerlab destroy
