@@ -5,3 +5,9 @@ topology:
       kind: juniper_vsrx
       image: ghcr.io/iambryant/vrnetlab/juniper_vsrx:23.4R2-S5.5
       startup-config: configs/__clabNodeName__.partial.cfg
+  links:
+  - type: mgmt-net
+    endpoint:
+      node: vsrx-01
+      interface: ge-0/0/0
+    host-interface: vsrx-01-ge-0/0/0
