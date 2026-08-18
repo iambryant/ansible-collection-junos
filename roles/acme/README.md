@@ -49,6 +49,7 @@ None.
 
     - hosts: all
       connection: juniper.device.pyez
+      gather_facts: false
       roles:
         - iambryant.junos.acme
 
