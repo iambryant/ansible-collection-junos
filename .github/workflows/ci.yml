@@ -36,8 +36,6 @@ jobs:
   molecule:
     name: Molecule
     runs-on: ubuntu-latest
-    permissions:
-      packages: read
     strategy:
       matrix:
         role:
