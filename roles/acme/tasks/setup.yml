@@ -47,3 +47,12 @@
     # Set to json to bypass these issues:
     # https://github.com/Juniper/ansible-junos-stdlib/issues/622
     # https://github.com/Juniper/ansible-junos-stdlib/issues/808
+
+- name: "Ensure ACME account key pair is generated"
+  juniper.device.command:
+    commands:
+      - >
+        request security pki generate-key-pair size {{ acme_key_size }}
+        type {{ acme_key_type }}
+        acme-key-id {{ acme_key_id }}
+    formats: "json"

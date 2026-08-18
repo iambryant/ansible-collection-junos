@@ -1,0 +1,14 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: "Check if ACME certificate for domain already exists"
+      juniper.device.command:
+        commands:
+          - "show security pki local-certificate"
+        formats: "json"
+      register: acme_cert_check
+
+    - name: "Display content of check"
+      ansible.builtin.debug:
+        var: acme_cert_check['msg']

@@ -3,15 +3,6 @@
   ansible.builtin.set_fact:
     cert_id: "ACME-CERT-{{ domain_name | replace('.', '-') | upper }}"
 
-- name: "Ensure ACME account key pair is generated"
-  juniper.device.command:
-    commands:
-      - >
-        request security pki generate-key-pair size {{ acme_key_size }}
-        type {{ acme_key_type }}
-        acme-key-id {{ acme_key_id }}
-    formats: "json"
-
 - name: "Check if ACME certificate for domain already exists"
   juniper.device.command:
     commands:
