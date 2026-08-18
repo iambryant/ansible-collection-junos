@@ -21,13 +21,15 @@ The API endpoint to use for certificate requests. Defaults to `https://acme-v02.
 
     acme_key_size: "256"
 
-    acme_key_id: "ACME-KEY"
+The key type and size to use for generating key-pairs. Defaults to key type `ecdsa` with a key size of `256`.
 
-    acme_certificate_id: "ACME-CERT"
+    acme_key_id: "ACME-ACCOUNT-KEY"
 
-    acme_domain_name: ""
+The name to use for the key-pair generated to talk to Let's Encrypt. Defaults to `ACME-ACCOUNT-KEY`.
 
-The domain name that will be used for the Let's Encrypt certificate request.
+    acme_domain_names: []
+
+The domain names that will be used for Let's Encrypt certificate requests.
 
     acme_email: ""
 
