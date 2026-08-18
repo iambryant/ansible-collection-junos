@@ -10,6 +10,15 @@
     formats: "json"
   register: acme_cert_check
 
+- name: "Ensure ACME account key is generated"
+  juniper.device.command:
+    commands:
+      - >
+        request security pki generate-key-pair size {{ acme_key_size }}
+        type {{ acme_key_type }}
+        acme-key-id {{ acme_key_id }}
+    formats: "json"
+
 - name: "Ensure certificate key pair for domain is generated"
   juniper.device.command:
     commands:
