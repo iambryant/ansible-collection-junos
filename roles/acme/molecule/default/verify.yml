@@ -11,4 +11,4 @@
 
     - name: "Display content of check"
       ansible.builtin.debug:
-        var: acme_cert_check['msg']
+        var: acme_cert_check
