@@ -1,10 +1,10 @@
 system {
-    host-name {{ host_name }};
+    host-name {{ vnf_instance.name }};
     root-authentication {
-        encrypted-password "{{ root_authentication }}";
+        encrypted-password "{{ vnf_instance.root_authentication | default(system_root_authentication}}";
     }
     login {
-{% for user in login_users %}
+{% for user in vnf_config.login_users | default(system_login_users) %}
         user {{ user.name }} {
             class {{ user.class }};
             authentication {
@@ -23,14 +23,14 @@ system {
             root-login deny;
         }
     }
-    domain-name {{ domain_name }};
+    domain-name {{ vnf_instance.domain }};
     management-instance;
 }
 interfaces {
-    {{ mgmt_interface }} {
+    fxp0 {
         unit 0 {
             family inet {
-                address {{ mgmt_ip }};
+                address {{ vnf_instance.mgmt_ip }};
             }
         }
     }
@@ -40,7 +40,7 @@ routing-instances {
         description "Management VRF";
         routing-options {
             static {
-                route 0.0.0.0/0 next-hop {{ mgmt_gateway }};
+                route 0.0.0.0/0 next-hop {{ vnf_instance.mgmt_gateway }};
             }
         }
     }
