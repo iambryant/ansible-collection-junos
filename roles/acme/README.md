@@ -43,6 +43,10 @@ The security zone to allow HTTP inbound on. Defaults to `untrust`.
 
 The interface in the security zone to allow HTTP inbound on. Defaults to `ge-0/0/0.0`.
 
+    acme_timeout: 30
+
+The maximum number of seconds to wait for the Let's Encrypt certificate request to be processed. Defaults to `30`.
+
 ## Dependencies
 
 None.

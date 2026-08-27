@@ -13,3 +13,5 @@ acme_email: ""
 
 acme_security_zone: "untrust"
 acme_security_zone_interface: "ge-0/0/0.0"
+
+acme_timeout: 30

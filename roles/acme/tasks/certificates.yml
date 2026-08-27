@@ -32,4 +32,5 @@
         email {{ acme_email }}
         letsencrypt-enrollment yes terms-of-service agree
     formats: "json"
+    timeout: {{ acme_timeout }}
   when: "cert_id not in acme_cert_check.stdout"
