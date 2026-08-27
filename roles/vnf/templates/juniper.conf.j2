@@ -1,7 +1,7 @@
 system {
     host-name {{ vnf_instance.name }};
     root-authentication {
-        encrypted-password "{{ vnf_instance.root_authentication | default(system_root_authentication}}";
+        encrypted-password "{{ vnf_instance.root_authentication | default(system_root_authentication) }}";
     }
     login {
 {% for user in vnf_config.login_users | default(system_login_users) %}
