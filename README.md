@@ -40,3 +40,9 @@ To see an example of this collection's usage, see: https://github.com/iambryant/
 ## License
 
 MIT
+
+## Acknowledgements
+
+Credit goes to [laurent-jnpr](https://github.com/laurent-jnpr); I used elements from a template in their repository
+[VNF-on-Juniper-NFX-with-Ansible](https://github.com/Juniper-SE/VNF-on-Juniper-NFX-with-Ansible) to build the VNF
+creation template.
