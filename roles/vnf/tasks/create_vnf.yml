@@ -32,7 +32,7 @@
       juniper.device.config:
         load: "replace"
         format: "text"
-        template: "templates/virtual_network_functions.conf.j2"
+        template: "{{ role_path }}/templates/virtual_network_functions.conf.j2"
         comment: "VNF {{ vnf_instance.name }} created with Ansible"
         vars:
           virtual_network_function: "{{ vnf_instance }}"
