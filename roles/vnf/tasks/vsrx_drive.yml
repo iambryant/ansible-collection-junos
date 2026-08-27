@@ -7,7 +7,7 @@
 
 - name: "Ensure vSRX bootstrap configuration file is generated from template"
   ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/juniper.conf.j2"
+    src: "templates/juniper.conf.j2"
     dest: "/tmp/juniper.conf"
     mode: '0644'
 

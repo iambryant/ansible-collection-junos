@@ -12,19 +12,19 @@
 
 - name: "Ensure cloud-init meta-data file is created"
   ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/meta-data.j2"
+    src: "templates/meta-data.j2"
     dest: "/tmp/meta-data"
     mode: '0644'
 
 - name: "Ensure cloud-init network-config file is present"
   ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/network-config.j2"
+    src: "templates/network-config.j2"
     dest: "/tmp/network-config"
     mode: '0644'
 
 - name: "Ensure cloud-init user-data file is present"
   ansible.builtin.template:
-    src: "{{ playbook_dir }}/templates/user-data.j2"
+    src: "templates/user-data.j2"
     dest: "/tmp/user-data"
     mode: '0644'
 
