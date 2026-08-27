@@ -6,15 +6,6 @@
     mode: '0644'
   run_once: true
 
-- name: "Ensure VNFs are created"
-  ansible.builtin.include_tasks: tasks/create_vnf.yml
-  loop: "{{ vnf_instances }}"
-  loop_control:
-    loop_var: vnf_instance
-  when:
-    - vnf_instances is defined
-    - (not vnf_instance.absent | default(false))
-
 - name: "Ensure VNFs are deleted"
   ansible.builtin.include_tasks: tasks/delete_vnf.yml
   loop: "{{ vnf_instances }}"
@@ -23,3 +14,12 @@
   when:
     - vnf_instances is defined
     - (vnf_instance.absent | default(false))
+
+- name: "Ensure VNFs are created"
+  ansible.builtin.include_tasks: tasks/create_vnf.yml
+  loop: "{{ vnf_instances }}"
+  loop_control:
+    loop_var: vnf_instance
+  when:
+    - vnf_instances is defined
+    - (not vnf_instance.absent | default(false))
