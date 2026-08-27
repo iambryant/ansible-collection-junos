@@ -1,0 +1,48 @@
+---
+- name: "Check if VNF already exists before creating"
+  juniper.device.command:
+    commands:
+      - "show virtual-network-functions {{ vnf_instance.name }}"
+    formats: "json"
+  register: vnf_check
+
+- name: "Ensure VNF is created if it doesn't already exist"
+  when: vnf_check.parsed_output['vnf-information'][0] | length == 0
+  block:
+    - name: "Include VNF-specific disk and configuration tasks"
+      ansible.builtin.include_tasks: "tasks/{{ vnf_instance.type | default('linux') }}_drive.yml"
+
+    - name: "Ensure VNF boot disk is uploaded"
+      juniper.device.file_copy:
+        action: "put"
+        protocol: "scp"
+        local_dir: "/tmp"
+        file: "{{ vnf_instance.name }}.qcow2"
+        remote_dir: "/var/public"
+
+    - name: "Ensure VNF config drive is uploaded"
+      juniper.device.file_copy:
+        action: "put"
+        protocol: "scp"
+        local_dir: "/tmp"
+        file: "{{ vnf_instance.name }}.iso"
+        remote_dir: "/var/public"
+
+    - name: "Ensure VNF is created"
+      juniper.device.config:
+        load: "replace"
+        format: "text"
+        template: "{{ playbook_dir }}/templates/virtual_network_functions.conf.j2"
+        comment: "VNF {{ vnf_instance.name }} created with Ansible"
+        vars:
+          virtual_network_function: "{{ vnf_instance }}"
+
+    - name: "Ensure VNF disk files are cleaned up from /tmp"
+      ansible.builtin.file:
+        path: "/tmp/{{ vnf_disk_file }}"
+        state: absent
+      loop:
+        - "{{ vnf_instance.name }}.qcow2"
+        - "{{ vnf_instance.name }}.iso"
+      loop_control:
+        loop_var: "vnf_disk_file"
