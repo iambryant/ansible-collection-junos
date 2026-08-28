@@ -32,6 +32,7 @@ collection and requires the following packages on the control node:
 ## Included Roles
 
   - `iambryant.junos.acme` ([documentation](https://github.com/iambryant/ansible-collection-junos/blob/main/roles/acme/README.md))
+  - `iambryant.junos.vnf` ([documentation](https://github.com/iambryant/ansible-collection-junos/blob/main/roles/vnf/README.md))
 
 ## Usage
 
