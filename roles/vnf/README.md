@@ -35,10 +35,10 @@ The list of virtual network functions to be installed. Supports the following pa
 
 ### vcpu_mapping
 
-| Parameter      | Type    | Required | Description                                                      |
-| :---           | :---    | :---     | :---                                                             |
-| `virtual_cpu`  | Integer | **Yes**  | The CPU core of the VNF.                                         |
-| `physical_cpu` | Integer | **Yes**  | The physical CPU you want to bind the virtual CPU of the VNF to. |
+| Parameter      | Type    | Required | Description                                                                                  |
+| :---           | :---    | :---     | :---                                                                                         |
+| `virtual_cpu`  | Integer | **Yes**  | The virtual CPU (vCPU) ID of the VNF.                                                        |
+| `physical_cpu` | Integer | **Yes**  | The physical CPU thread (logical processor ID) from the hypervisor host to bind the vCPU to. |
 
 ### interfaces
 
