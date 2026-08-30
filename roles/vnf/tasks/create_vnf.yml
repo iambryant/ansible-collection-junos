@@ -1,5 +1,5 @@
 ---
-- name: "Check if VNF already exists before creating"
+- name: "Check if VNF already exists before creating: {{ vnf_instance.name }}"
   juniper.device.command:
     commands:
       - "show virtual-network-functions {{ vnf_instance.name }}"
