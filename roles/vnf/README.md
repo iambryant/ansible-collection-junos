@@ -2,6 +2,12 @@
 
 This role installs virtual network functions on the Juniper NFX family.
 
+> [!NOTE]
+> This role manages Linux and vSRX VNFs by default. It will download an Ubuntu 26 cloud image to `/tmp` on your control
+> node to use for Linux VNFs. If you're planning on running a vSRX VNF, place the `junos-vsrx3-x86-64-23.4R2-S5.5.qcow2`
+> image in `/tmp` on your control node. I should probably add support for more VNF types (VyOS, RouterOS, etc.) in the
+> future.
+
 ## Requirements
 
 Refer to the [requirements](https://github.com/iambryant/ansible-collection-junos#requirements) section in the
