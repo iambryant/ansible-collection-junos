@@ -51,6 +51,8 @@ _value:
   type: str
 """
 
+QUOTED_VALUES = {"comment", "contact", "description", "location", "message"}
+
 def to_junos_config(data, indent=0):
     pad = "    " * indent
     lines = []
@@ -76,7 +78,8 @@ def to_junos_config(data, indent=0):
                 else:
                     lines.append(f"{pad}{key} {item};")
         elif value is not None:
-            lines.append(f"{pad}{key} {value};")
+            formatted_value = f'"{value}"' if key in QUOTED_VALUES else value
+            lines.append(f"{pad}{key} {formatted_value};")
 
     return "\n".join(lines)
 
