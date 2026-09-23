@@ -39,7 +39,7 @@ EXAMPLES = r"""
       interfaces:
         ge-0/0/0:
           description: "Link to Core-02"
-          unit 0:
+          "unit 0":
             family:
               inet:
                 address: 10.255.255.1/30
@@ -51,7 +51,7 @@ _value:
   type: str
 """
 
-QUOTED_VALUES = {"comment", "contact", "description", "location", "message"}
+KEYS_REQUIRING_QUOTES = {"comment", "contact", "description", "location", "message"}
 
 def to_junos_config(data, indent=0):
     pad = "    " * indent
@@ -78,7 +78,7 @@ def to_junos_config(data, indent=0):
                 else:
                     lines.append(f"{pad}{key} {item};")
         elif value is not None:
-            formatted_value = f'"{value}"' if key in QUOTED_VALUES else value
+            formatted_value = f'"{value}"' if key in KEYS_REQUIRING_QUOTES else value
             lines.append(f"{pad}{key} {formatted_value};")
 
     return "\n".join(lines)
