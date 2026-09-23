@@ -74,11 +74,9 @@ def to_junos_config(data, indent=0):
                         lines.append(nested)
                     lines.append(f"{pad}}}")
                 else:
-                    val_str = f'"{item}"' if isinstance(item, str) else item
-                    lines.append(f"{pad}{key} {val_str};")
+                    lines.append(f"{pad}{key} {item};")
         elif value is not None:
-            val_str = f'"{value}"' if isinstance(value, str) else value
-            lines.append(f"{pad}{key} {val_str};")
+            lines.append(f"{pad}{key} {value};")
 
     return "\n".join(lines)
 
