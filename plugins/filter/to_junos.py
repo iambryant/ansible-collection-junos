@@ -51,7 +51,6 @@ _value:
   type: str
 """
 
-KEYS_REQUIRING_QUOTES = {"comment", "contact", "description", "location", "message"}
 
 def to_junos_config(data, indent=0):
     pad = "    " * indent
@@ -78,8 +77,12 @@ def to_junos_config(data, indent=0):
                 else:
                     lines.append(f"{pad}{key} {item};")
         elif value is not None:
-            formatted_value = f'"{value}"' if key in KEYS_REQUIRING_QUOTES else value
-            lines.append(f"{pad}{key} {formatted_value};")
+            if value is True:
+                lines.append(f"{pad}{key};") # Used for configuration parameters that don't have an accompanying value
+            elif value is False:
+                pass  # Do not render anything if false
+            else:
+                lines.append(f"{pad}{key} {value};")
 
     return "\n".join(lines)
 
