@@ -19,25 +19,21 @@ collection's README.
 
 The list of virtual network functions to be installed. Supports the following parameters:
 
-| Parameter                 | Type       | Required | Description                                                                                                                                                                             |
-| :---                      | :---       | :---     | :---                                                                                                                                                                                    |
-| `name`                    | String     | **Yes**  | The name of the VNF. Also used as the hostname in cloud-init, if type set to `linux`, or juniper.conf if type set to `vsrx`.                                                            |
-| `domain`                  | String     | **Yes**  | The domain name the VNF will use.                                                                                                                                                       |
-| `type`                    | String     | No       | The type of VNF to create. Options are `linux` or `vsrx`. Defaults to `linux`.                                                                                                          |
-| `root_authentication`     | String     | No       | The encrypted root password for the VNF. **Required if using type `vsrx`.** Defaults to `system_root_authentication` if omitted, which can be defined in `group_vars/` or `host_vars/`. |
-| `mgmt_ip`                 | String     | No       | If type was set to `vsrx`, the management IP the VNF will use.                                                                                                                          |
-| `mgmt_gateway`            | String     | No       | If type was set to `vsrx`, the management gateway the VNF will use.                                                                                                                     |
-| `vcpu_count`              | Integer    | **Yes**  | The number of vCPUs the VNF will use.                                                                                                                                                   |
-| `memory`                  | Integer    | **Yes**  | The amount of memory the VNF will use.                                                                                                                                                  |
-| `vcpu_mapping`            | List       | No       | Refer to `vcpu_mapping`.                                                                                                                                                                |
-| `hardware_virtualization` | Boolean    | No       | Whether or not the VNF should use hardware virtualization. Defaults to `false`.                                                                                                         |
-| `hugepage`                | Boolean    | No       | Whether or not the VNF should use hugepages.                                                                                                                                            |
-| `no_default_interfaces`   | Boolean    | No       | Whether or not Junos should allocate the default `eth0` and `eth1` interfaces for the VNF. Defaults to `false`.                                                                         |
-| `interfaces`              | List       | No       | Refer to `interfaces`.                                                                                                                                                                  |
-| `no_autostart`            | Boolean    | No       | Whether or not the VNF should start after creation/on boot. Defaults to `false`.                                                                                                        |
-| `absent`                  | Boolean    | No       | Whether or not the VNF should be removed. Defaults to `false`.                                                                                                                          |
-| `user_data`               | Dictionary | No       | Accepts cloud-init `user-data` configuration. **Required if using type `linux`.**                                                                                                       |
-| `network_config`          | Dictionary | No       | Accepts cloud-init `network-config` configuration. **Required if using type `linux`.**                                                                                                  |
+| Parameter                 | Type       | Required | Description                                                                                                                  |
+| :---                      | :---       | :---     | :---                                                                                                                         |
+| `name`                    | String     | **Yes**  | The name of the VNF. Also used as the hostname in cloud-init, if type set to `linux`, or juniper.conf if type set to `vsrx`. |
+| `domain`                  | String     | **Yes**  | The domain name the VNF will use.                                                                                            |
+| `type`                    | String     | No       | The type of VNF to create. Options are `linux` or `vsrx`. Defaults to `linux`.                                               |
+| `vcpu_count`              | Integer    | **Yes**  | The number of vCPUs the VNF will use.                                                                                        |
+| `memory`                  | Integer    | **Yes**  | The amount of memory the VNF will use.                                                                                       |
+| `vcpu_mapping`            | List       | No       | Refer to `vcpu_mapping`.                                                                                                     |
+| `hardware_virtualization` | Boolean    | No       | Whether or not the VNF should use hardware virtualization. Defaults to `false`.                                              |
+| `hugepage`                | Boolean    | No       | Whether or not the VNF should use hugepages.                                                                                 |
+| `no_default_interfaces`   | Boolean    | No       | Whether or not Junos should allocate the default `eth0` and `eth1` interfaces for the VNF. Defaults to `false`.              |
+| `interfaces`              | List       | No       | Refer to `interfaces`.                                                                                                       |
+| `no_autostart`            | Boolean    | No       | Whether or not the VNF should start after creation/on boot. Defaults to `false`.                                             |
+| `absent`                  | Boolean    | No       | Whether or not the VNF should be removed. Defaults to `false`.                                                               |
+| `config_drive`            | Dictionary | **Yes**  | Refer to `config_drive`.                                                                                                     |
 
 ### vcpu_mapping
 
@@ -54,6 +50,14 @@ The list of virtual network functions to be installed. Supports the following pa
 | `usage`     | String | **Yes**  | The usage type of the interface. Options include `internal`, `out-of-band`, `vlan`, or an interface starting with `hsxe` if using SR-IOV. |
 | `mode`      | String | No       | The mode of the interface. **Required if `usage` is set to `vlan`.**                                                                      |
 | `vlan_name` | String | No       | The member or VLAN ID name for the interface mapping. TO FIX: Currently only supports one vlan.                                           |
+
+### config_drive
+
+| Parameter        | Type       | Required | Description                                                                            |
+| :---             | :---       | :---     | :---                                                                                   |
+| `user_data`      | Dictionary | No       | Accepts cloud-init `user-data` configuration. **Required if using type `linux`.**      |
+| `network_config` | Dictionary | No       | Accepts cloud-init `network-config` configuration. **Required if using type `linux`.** |
+| `juniper_config` | String     | No       | Accepts Junos OS configuration. **Required if using type `vsrx`**.                     |
 
 ## Dependencies
 
